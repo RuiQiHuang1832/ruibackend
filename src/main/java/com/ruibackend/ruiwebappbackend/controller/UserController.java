@@ -7,12 +7,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//^(this is the parent directory, must go here first before going to any other mappings)
+
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
-@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @GetMapping("/home")
+    public String home() {
+        return "This is home page";
+    }
+
+
 
     @PostMapping("/add")
     public String add(@RequestBody User user) {
