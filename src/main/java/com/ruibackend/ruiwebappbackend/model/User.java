@@ -10,9 +10,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String username;
-    private String email;
-    private String password;
 
     @Override
     public String toString() {
@@ -21,8 +18,25 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", ipaddress='" + ipaddress + '\'' +
                 '}';
     }
+
+    private String username;
+    private String email;
+    private String password;
+    private String ipaddress;
+    public String getIpaddress() {
+        return ipaddress;
+    }
+
+    public void setIpaddress(String ipaddress) {
+        this.ipaddress = ipaddress;
+    }
+
+
+
+
 
     public int getId() {
         return id;
