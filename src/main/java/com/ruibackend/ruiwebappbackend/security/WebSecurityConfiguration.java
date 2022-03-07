@@ -3,6 +3,7 @@ package com.ruibackend.ruiwebappbackend.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,10 +28,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/user/home")
                 .authenticated()
-                .antMatchers("/user/stuff")
-                .hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/user/admin")
-                .hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/user/stuff").hasAuthority("USER")
+                .antMatchers(HttpMethod.GET,"/user/admin").hasAuthority("ADMIN")
                 .antMatchers("/**")  //prevents default login security from spring
                 .permitAll()//afterwards allow access
 
