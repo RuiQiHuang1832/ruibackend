@@ -20,8 +20,15 @@ public class UserController {
     public String home() {
         return "This is home page";
     }
+    @GetMapping("/admin")
+    public String admin() {
+        return "This is admin page";
+    }
 
-
+    @GetMapping("/stuff")
+    public String stuff() {
+        return "This is stuff page";
+    }
 
     @PostMapping("/add")
     public String add(@RequestBody User user) {
