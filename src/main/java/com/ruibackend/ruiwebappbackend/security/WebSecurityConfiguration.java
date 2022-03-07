@@ -27,13 +27,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/user/home")
                 .authenticated()
-                .antMatchers("/user/stuff/**")
+                .antMatchers("/user/stuff")
                 .hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/user/admin/**")
+                .antMatchers("/user/admin")
                 .hasAuthority("ADMIN")
                 .antMatchers("/**")  //prevents default login security from spring
                 .permitAll()//afterwards allow access
-                .anyRequest().authenticated()
+
                 .and()
                 .httpBasic();
 
