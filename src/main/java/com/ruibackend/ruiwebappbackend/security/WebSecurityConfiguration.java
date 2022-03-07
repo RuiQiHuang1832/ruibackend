@@ -33,7 +33,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .hasAuthority("ADMIN")
                 .antMatchers("/**")  //prevents default login security from spring
                 .permitAll()//afterwards allow access
-
+                .anyRequest().authenticated()
                 .and()
                 .httpBasic();
 
