@@ -10,11 +10,22 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+
     private String role;
     private String username;
     private String email;
     private String password;
     private String ipaddress;
+    private String bio;
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
 
 
     public String getRole() {
@@ -25,17 +36,7 @@ public class User {
         this.role = role;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", role='" + role + '\'' +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", ipaddress='" + ipaddress + '\'' +
-                '}';
-    }
+
 
 
     public String getIpaddress() {

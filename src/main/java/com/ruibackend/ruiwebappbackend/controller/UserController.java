@@ -1,6 +1,7 @@
 package com.ruibackend.ruiwebappbackend.controller;
 
 import com.ruibackend.ruiwebappbackend.model.User;
+import com.ruibackend.ruiwebappbackend.repository.UserRepository;
 import com.ruibackend.ruiwebappbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
 
     @GetMapping("/home")
     public String home() {
@@ -39,6 +41,11 @@ public class UserController {
     @GetMapping("/getAll")
     public List<User> getAllStudents() {
         return userService.getAllStudents();
+    }
+
+    @PutMapping("/updateBio")
+    public User update(@RequestBody User userObj) {
+        return userService.update(userObj);
     }
 
 
