@@ -4,9 +4,18 @@ import com.ruibackend.ruiwebappbackend.model.User;
 import com.ruibackend.ruiwebappbackend.repository.UserRepository;
 import com.ruibackend.ruiwebappbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.core.io.Resource;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 //^(this is the parent directory, must go here first before going to any other mappings)
 
@@ -44,8 +53,20 @@ public class UserController {
     }
 
     @PutMapping("/updateBio")
-    public User update(@RequestBody User userObj) {
+    public User update(@RequestBody User userObj ) {
         return userService.update(userObj);
+    }
+    //Somehow spring is able to detect everything that matches the USER entity, without
+    //specifying @RequestBody annotation which is cool. guess it auto detects it
+    @PutMapping("/image")
+    public User uploadImage(User userObj, @RequestParam("file") MultipartFile multipartImage) throws IOException {
+
+       return userService.uploadImage(userObj,multipartImage);
+    }
+
+    @GetMapping(value = "/image/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public Resource downloadImage(@PathVariable int imageId) {
+            return userService.downloadImage(imageId);
     }
 
 

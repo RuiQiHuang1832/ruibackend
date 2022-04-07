@@ -1,9 +1,6 @@
 package com.ruibackend.ruiwebappbackend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
@@ -18,6 +15,30 @@ public class User {
     private String password;
     private String ipaddress;
     private String bio;
+    private String joinDate;
+    @Lob
+    private byte[] content;
+
+    public byte[] getContent() {
+        return content;
+    }
+
+    public void setContent(byte[] content) {
+        this.content = content;
+    }
+
+
+
+    public String getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(String joinDate) {
+        this.joinDate = joinDate;
+    }
+
+
+
     public String getBio() {
         return bio;
     }
