@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserService {
     User saveUser(User user);
     List<User> getAllStudents();
-    User update( User userObj);
-    User uploadImage(User userobj, MultipartFile multipartImage) throws IOException;
+    User update(int id, User userObj);
+    User uploadImage(int id, User userobj, MultipartFile multipartImage) throws IOException;
      Resource downloadImage(@PathVariable int imageId);
 }

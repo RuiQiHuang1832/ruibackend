@@ -52,16 +52,16 @@ public class UserController {
         return userService.getAllStudents();
     }
 
-    @PutMapping("/updateBio")
-    public User update(@RequestBody User userObj ) {
-        return userService.update(userObj);
+    @PatchMapping("/updateBio/{id}")
+    public User update(@PathVariable(value = "id") int id, @RequestBody User userObj ) {
+        return userService.update(id, userObj);
     }
     //Somehow spring is able to detect everything that matches the USER entity, without
     //specifying @RequestBody annotation which is cool. guess it auto detects it
-    @PutMapping("/image")
-    public User uploadImage(User userObj, @RequestParam("file") MultipartFile multipartImage) throws IOException {
+    @PatchMapping("/uploadimage/{id}")
+    public User uploadImage(@PathVariable(value = "id") int id, User userObj, @RequestParam("file") MultipartFile multipartImage) throws IOException {
 
-       return userService.uploadImage(userObj,multipartImage);
+       return userService.uploadImage(id,userObj,multipartImage);
     }
 
     @GetMapping(value = "/image/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)

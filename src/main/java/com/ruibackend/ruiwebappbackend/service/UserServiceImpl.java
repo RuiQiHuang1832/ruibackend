@@ -32,9 +32,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    // updates bio, find user BY id which grabs all info then set the bio based on the body.
+    //then save
     @Override
-    public User update(User userObj) {;
-        return userRepository.save(userObj);
+    public User update(int id, User userObj) {
+        User UserforBio = userRepository.findById(id).orElseThrow();
+        UserforBio.setBio(userObj.getBio());
+        return userRepository.save(UserforBio);
     }
 
     //previously I was creating a new User Object each time with user = new user(), which
@@ -44,9 +48,10 @@ public class UserServiceImpl implements UserService {
     // instead of creating new ones.
     //PUT request checks for ID and changes if it exists.
     @Override
-    public User uploadImage(User userobj, MultipartFile multipartImage) throws IOException {
-        userobj.setContent(multipartImage.getBytes());
-        return userRepository.save(userobj);
+    public User uploadImage(int id, User userobj, MultipartFile multipartImage) throws IOException {
+        User UserforImage = userRepository.findById(id).orElseThrow();
+        UserforImage.setContent(multipartImage.getBytes());
+        return userRepository.save(UserforImage);
     }
 
     @Override
@@ -54,7 +59,6 @@ public class UserServiceImpl implements UserService {
         byte[] image = userRepository.findById(imageId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND))
                 .getContent();
-
         return new ByteArrayResource(image);
     }
 }
