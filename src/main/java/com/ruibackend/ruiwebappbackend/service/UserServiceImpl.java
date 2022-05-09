@@ -24,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
+//        if (userRepository.findByUsername(user.getUsername()) != null) {
+//            return "ERROR";
+//        }
         return userRepository.save(user);
     }
 
@@ -61,4 +64,6 @@ public class UserServiceImpl implements UserService {
                 .getContent();
         return new ByteArrayResource(image);
     }
+
+
 }

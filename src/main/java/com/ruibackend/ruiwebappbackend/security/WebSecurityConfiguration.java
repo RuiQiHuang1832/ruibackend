@@ -26,10 +26,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/user/home")
+                .antMatchers("/users/home")
                 .authenticated()
-                .antMatchers(HttpMethod.GET,"/user/stuff").hasAuthority("USER")
-                .antMatchers(HttpMethod.GET,"/user/admin").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/users/login").hasAuthority("USER")
+                .antMatchers(HttpMethod.GET,"/users/admin").hasAuthority("ADMIN")
                 .antMatchers("/**")  //prevents default login security from spring
                 .permitAll()//afterwards allow access
 
@@ -43,9 +43,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     * */
     @Override
     public void configure(WebSecurity web) throws Exception {
-       web.ignoring().antMatchers("/user/add");
-        web.ignoring().antMatchers("/user/updateBio/{id}");   //needed to prevent cors error
-        web.ignoring().antMatchers("/user/uploadimage/{id}");
+       web.ignoring().antMatchers("/users/add");
+        web.ignoring().antMatchers("/users/{id}/biography");   //needed to prevent cors error
+        web.ignoring().antMatchers("/users/{id}/profileimage");
         //also needed cuz if you dont have this, my fetch will send a request to this and for some reason will ask for authentication,
         //if i include this, it will ignore this path and the POST method from the fetch API will go through.
         //Even though when you go to localhost:8080/user/add (after deleting this method), it will not ask for authentication,

@@ -1,16 +1,13 @@
 package com.ruibackend.ruiwebappbackend.controller;
 
 import com.ruibackend.ruiwebappbackend.model.User;
-import com.ruibackend.ruiwebappbackend.repository.UserRepository;
 import com.ruibackend.ruiwebappbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.core.io.Resource;
-import org.springframework.web.server.ResponseStatusException;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +18,7 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -35,10 +32,10 @@ public class UserController {
     public String admin() {
         return "This is admin page";
     }
-
-    @GetMapping("/stuff")
+    //login, for regular users
+    @GetMapping("/login")
     public String stuff() {
-        return "This is stuff page";
+        return "Successfully Logged In";
     }
 
     @PostMapping("/add")
@@ -47,18 +44,18 @@ public class UserController {
         return "new student added";
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/datalist")
     public List<User> getAllStudents() {
         return userService.getAllStudents();
     }
 
-    @PatchMapping("/updateBio/{id}")
+    @PatchMapping("/{id}/biography")
     public User update(@PathVariable(value = "id") int id, @RequestBody User userObj ) {
         return userService.update(id, userObj);
     }
     //Somehow spring is able to detect everything that matches the USER entity, without
     //specifying @RequestBody annotation which is cool. guess it auto detects it
-    @PatchMapping("/uploadimage/{id}")
+    @PatchMapping("/{id}/profileimage")
     public User uploadImage(@PathVariable(value = "id") int id, User userObj, @RequestParam("file") MultipartFile multipartImage) throws IOException {
 
        return userService.uploadImage(id,userObj,multipartImage);
