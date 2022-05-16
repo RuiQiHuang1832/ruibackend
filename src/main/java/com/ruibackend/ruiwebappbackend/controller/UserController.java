@@ -66,5 +66,10 @@ public class UserController {
             return userService.downloadImage(imageId);
     }
 
+    @PatchMapping("/{id}/password")
+    public User resetPassword(@PathVariable(value = "id") int id, @RequestBody User userObj) {
+            return userService.resetPassword(id, userObj);
+    }
+
 
 }

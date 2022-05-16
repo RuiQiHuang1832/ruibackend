@@ -46,6 +46,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
        web.ignoring().antMatchers("/users/add");
         web.ignoring().antMatchers("/users/{id}/biography");   //needed to prevent cors error
         web.ignoring().antMatchers("/users/{id}/profileimage");
+        web.ignoring().antMatchers("/users/{id}/password");
+
         //also needed cuz if you dont have this, my fetch will send a request to this and for some reason will ask for authentication,
         //if i include this, it will ignore this path and the POST method from the fetch API will go through.
         //Even though when you go to localhost:8080/user/add (after deleting this method), it will not ask for authentication,

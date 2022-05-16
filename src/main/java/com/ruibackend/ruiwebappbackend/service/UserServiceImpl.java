@@ -43,7 +43,12 @@ public class UserServiceImpl implements UserService {
         UserforBio.setBio(userObj.getBio());
         return userRepository.save(UserforBio);
     }
-
+    @Override
+    public User resetPassword(int id, User userObj) {
+        User passwordReset = userRepository.findById(id).orElseThrow();
+        passwordReset.setPassword(userObj.getPassword());
+        return userRepository.save(passwordReset);
+    }
     //previously I was creating a new User Object each time with user = new user(), which
     //set everything to null (the json data). SO, I instead decided to pass in the data from
     //existing Object form-data in the raw data instead of generating a new one, and save that in the repo with
@@ -64,6 +69,5 @@ public class UserServiceImpl implements UserService {
                 .getContent();
         return new ByteArrayResource(image);
     }
-
 
 }

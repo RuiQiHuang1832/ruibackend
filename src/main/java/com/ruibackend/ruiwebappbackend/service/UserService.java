@@ -10,8 +10,16 @@ import java.util.List;
 
 public interface UserService {
     Object saveUser(User user);
+
     List<User> getAllStudents();
+
     User update(int id, User userObj);
+
     User uploadImage(int id, User userobj, MultipartFile multipartImage) throws IOException;
-     Resource downloadImage(@PathVariable int imageId);
+
+    Resource downloadImage(@PathVariable int imageId);
+
+    User resetPassword(int id, User userObj);
 }
+
+
