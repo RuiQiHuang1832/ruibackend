@@ -43,6 +43,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     * */
     @Override
     public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/posts");
        web.ignoring().antMatchers("/users/add");
         web.ignoring().antMatchers("/users/{id}/biography");   //needed to prevent cors error
         web.ignoring().antMatchers("/users/{id}/profileimage");
